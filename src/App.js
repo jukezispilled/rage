@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import backgroundImage from './bg2.png'; // Ensure the correct path to your bg.png';
+import backgroundImage from './bg4.png'; // Ensure the correct path to your bg.png
+import bewareImage from './beware.png'; // Ensure the correct path to your beware.png
 import Xlogo from "./XLogo.jpg";
 import TG from "./TG.png";
 import { cn } from "./lib/utils";
@@ -15,14 +16,23 @@ const CopyIcon = () => (
 
 function App() {
   const [copied, setCopied] = useState(false);
+  const [modalVisible, setModalVisible] = useState(true);
+  const audioRef = useRef(null);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText('3LKmLkZXCPeKbsAQsZGuKRRZgGheDvhj1AcaYsKwpump');
+    navigator.clipboard.writeText('soon');
     setCopied(true);
     setTimeout(() => {
       setCopied(false);
     }, 2000); // Hide the message after 2 seconds
   };
+
+  const handleEnter = () => {
+    setModalVisible(false);
+    audioRef.current.play();
+  };
+
+  const springConfig = { stiffness: 300, damping: 30 };
 
   return (
     <div
@@ -34,43 +44,57 @@ function App() {
         backgroundSize: 'cover',
       }}
     >
-      <div className='absolute top-7 left-7 text-5xl md:text-8xl font-custom'>
-        mika
-      </div>
+      <audio ref={audioRef} src="https://ia803205.us.archive.org/26/items/rage-against-the-machine-killing-in-the-name/Rage%20Against%20The%20Machine%20-%20Killing%20In%20The%20Name.mp3" /> {/* Ensure the correct path to your audio file */}
       
-      <div className="absolute top-10 right-10 flex flex-col items-center z-10">
+      {modalVisible && (
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+          <div className="relative">
+            <div className="flex items-center justify-center p-10">
+              <button 
+                onClick={handleEnter} 
+                className="bg-[#ff3737] md:hover:bg-red-700 transition ease-in-out duration-150 text-white p-6 text-6xl font-custom"
+              >
+                Enter
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      <div className="absolute top-7 left-7 flex flex-col items-center z-10">
         <div className="flex flex-row">
           <a href="https://x.com/mikamikasol" className="p-2 hover:scale-110 transition ease-in-out duration-200">
-            <img src={Xlogo} alt="Xlogo" className="w-14 h-14 rounded-md" />
+            <img src={Xlogo} alt="Xlogo" className="w-12 h-12" />
           </a>
           <a href="https://t.me/mikamikasol" className="p-2 hover:scale-110 transition ease-in-out duration-200">
-            <img src={TG} alt="Tg logo" className="w-14 h-14" />
+            <img src={TG} alt="Tg logo" className="w-12 h-12" />
           </a>
         </div>
       </div>
 
-      <div className="absolute inset-0 flex flex-col justify-center items-center">
-        <div className="flex justify-center items-center h-full">
-          <motion.img
-            whileHover={{ scale: 1.05, y: -10 }}
-            transition={{ type: 'spring', stiffness: 300 }}
-            src="/mika.png"
-            alt="Tunes"
-            className="-mt-[7.5%] w-[50%] md:w-[30%] h-auto border rounded-md"
-          />
-        </div>
-      </div>
+      <motion.img
+        className='absolute -right-10 -bottom-10'
+        src="rage.png"
+        alt="Rage"
+        animate={{
+          x: [-7, 7, -5, 9, -4], // Movement back and forth
+          transition: {
+            repeat: Infinity, // Repeat forever
+            duration: 0.1, // Duration for each movement
+          },
+        }}
+      />
       
       <div className='absolute bottom-10 flex justify-center'>
-        <div className='flex flex-col sm:flex-row justify-center bg-slate-100 rounded-xl md:rounded-full z-10 items-center gap-1 md:gap-4 px-5 py-3 max-w-full border-2 border-slate-400'>
+        <div className='flex flex-col sm:flex-row justify-center bg-slate-100 z-10 items-center gap-1 md:gap-4 px-5 py-3 max-w-full border-2 border-red-500'>
           <button
             onClick={handleCopy}
-            className="text-sm bg-indigo-400 text-white py-2 px-4 rounded-full md:hover:bg-indigo-500 border-2 border-white transition-colors duration-300 z-10 whitespace-nowrap"
+            className="text-sm bg-red-500 text-white py-2 px-4 md:hover:bg-red-700 transition-colors duration-300 z-10 whitespace-nowrap"
           >
             {copied ? 'Copied!' : <CopyIcon />}
           </button>
           <div className='text-xs sm:text-sm md:text-base overflow-x-auto whitespace-nowrap'>
-          3LKmLkZXCPeKbsAQsZGuKRRZgGheDvhj1AcaYsKwpump
+            soon..
           </div>
         </div>
       </div>
