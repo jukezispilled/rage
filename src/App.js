@@ -20,7 +20,7 @@ function App() {
   const audioRef = useRef(null);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText('soon');
+    navigator.clipboard.writeText('4HDMjq6YBHX7F2BhZ1tNUb3kLj91kopzm8EbAkKHpump');
     setCopied(true);
     setTimeout(() => {
       setCopied(false);
@@ -94,7 +94,7 @@ function App() {
             {copied ? 'Copied!' : <CopyIcon />}
           </button>
           <div className='text-xs sm:text-sm md:text-base overflow-x-auto whitespace-nowrap'>
-            soon..
+            4HDMjq6YBHX7F2BhZ1tNUb3kLj91kopzm8EbAkKHpump
           </div>
         </div>
       </div>
