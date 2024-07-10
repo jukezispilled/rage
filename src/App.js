@@ -63,10 +63,10 @@ function App() {
       
       <div className="absolute top-7 left-7 flex flex-col items-center z-10">
         <div className="flex flex-row">
-          <a href="https://x.com/mikamikasol" className="p-2 hover:scale-110 transition ease-in-out duration-200">
+          <a href="https://x.com/solanaraging" className="p-2 hover:scale-110 transition ease-in-out duration-200">
             <img src={Xlogo} alt="Xlogo" className="w-12 h-12" />
           </a>
-          <a href="https://t.me/mikamikasol" className="p-2 hover:scale-110 transition ease-in-out duration-200">
+          <a href="https://t.me/solanarage" className="p-2 hover:scale-110 transition ease-in-out duration-200">
             <img src={TG} alt="Tg logo" className="w-12 h-12" />
           </a>
         </div>
